@@ -1,6 +1,6 @@
 {
   "name": "react-modal-onfido",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "Accessible modal dialog component for React.JS",
   "main": "./lib/index",
   "repository": {
@@ -16,7 +16,8 @@
     "pretest": "npm run build",
     "test": "scripts/test --browsers Firefox",
     "start": "scripts/dev-examples",
-    "build": "cross-env BABEL_ENV=commonjs babel src --out-dir lib"
+    "build": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
+    "prepublish": "npm run build"
   },
   "authors": [
     "Ryan Florence"
