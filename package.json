@@ -5,7 +5,7 @@
   "main": "./lib/index",
   "repository": {
     "type": "git",
-    "url": "https://github.com/onfido/react-modal-onfido"
+    "url": "https://github.com/onfido/react-modal-onfido.git"
   },
   "homepage": "https://github.com/onfido/react-modal-onfido",
   "bugs": "https://github.com/onfido/react-modal-onfido/issues",
