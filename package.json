@@ -1,14 +1,14 @@
 {
-  "name": "react-modal",
-  "version": "1.4.0",
+  "name": "react-modal-onfido",
+  "version": "1.5.3",
   "description": "Accessible modal dialog component for React.JS",
   "main": "./lib/index",
   "repository": {
     "type": "git",
-    "url": "https://github.com/rackt/react-modal.git"
+    "url": "https://github.com/onfido/react-modal-onfido.git"
   },
-  "homepage": "https://github.com/rackt/react-modal",
-  "bugs": "https://github.com/rackt/react-modal/issues",
+  "homepage": "https://github.com/onfido/react-modal-onfido",
+  "bugs": "https://github.com/onfido/react-modal-onfido/issues",
   "directories": {
     "example": "examples"
   },
@@ -16,7 +16,8 @@
     "pretest": "npm run build",
     "test": "scripts/test --browsers Firefox",
     "start": "scripts/dev-examples",
-    "build": "cross-env BABEL_ENV=commonjs babel src --out-dir lib"
+    "build": "cross-env BABEL_ENV=commonjs babel src --out-dir lib",
+    "prepublish": "npm run build"
   },
   "authors": [
     "Ryan Florence"
