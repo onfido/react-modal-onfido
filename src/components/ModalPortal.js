@@ -1,9 +1,11 @@
 var React = require('react');
 var div = React.DOM.div;
 var focusManager = require('../helpers/focusManager');
+var ariaAppHider = require("../helpers/ariaAppHider");
 var scopeTab = require('../helpers/scopeTab');
 
 var noOp = function(){};
+let ariaHiddenInstances = 0;
 
 var defaultProps = {
   onAfterClose: noOp,
@@ -64,6 +66,7 @@ var ModalPortal = module.exports = React.createClass({
   },
 
   open: function() {
+    this.beforeOpen();
     if (this.state.afterOpen && this.state.beforeClose) {
       clearTimeout(this.closeTimer);
       this.setState({ beforeClose: false });
@@ -91,7 +94,7 @@ var ModalPortal = module.exports = React.createClass({
 
   focusContent: function() {
     // Don't steal focus from inner elements
-    if (!this.contentHasFocus()) {
+    if (this.refs.content && !this.contentHasFocus()) {
       this.refs.content.focus();
     }
   },
@@ -111,9 +114,31 @@ var ModalPortal = module.exports = React.createClass({
   },
 
   afterClose: function() {
+    const { appElement, ariaHideApp, onAfterClose } = this.props;
+      // Reset aria-hidden attribute if all modals have been removed
+     if (ariaHideApp && ariaHiddenInstances > 0) {
+       ariaHiddenInstances -= 1;
+
+       if (ariaHiddenInstances === 0) {
+         ariaAppHider.show(appElement);
+       }
+     }
+
     focusManager.returnFocus();
     focusManager.teardownScopedFocus();
-    this.props.onAfterClose();
+    onAfterClose();
+  },
+
+  beforeOpen: function() {
+    const {
+      appElement,
+      ariaHideApp
+    } = this.props;
+
+    if (ariaHideApp) {
+      ariaHiddenInstances += 1;
+      ariaAppHider.hide(appElement);
+    }
   },
 
   handleKeyDown: function(event) {
@@ -204,7 +229,8 @@ var ModalPortal = module.exports = React.createClass({
           onKeyDown: this.handleKeyDown,
           onMouseDown: this.handleContentMouseDown,
           onMouseUp: this.handleContentMouseUp,
-          role: "dialog"
+          role: "dialog",
+          'aria-label': this.props.contentLabel
         },
           this.props.children
         )
