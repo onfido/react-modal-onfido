@@ -1,6 +1,6 @@
 {
   "name": "react-modal-onfido",
-  "version": "1.5.3",
+  "version": "1.6.0",
   "description": "Accessible modal dialog component for React.JS",
   "main": "./lib/index",
   "repository": {
