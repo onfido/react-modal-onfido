@@ -94,7 +94,9 @@ var ModalPortal = module.exports = React.createClass({
 
   focusContent: function() {
     // Don't steal focus from inner elements
-    this.refs.content && !this.contentHasFocus() && this.refs.content.focus()
+    if (this.refs.content && !this.contentHasFocus()) {
+      this.refs.content.focus();
+    }
   },
 
   closeWithTimeout: function() {
@@ -112,7 +114,7 @@ var ModalPortal = module.exports = React.createClass({
   },
 
   afterClose: function() {
-    const { appElement, ariaHideApp } = this.props;
+    const { appElement, ariaHideApp, onAfterClose } = this.props;
       // Reset aria-hidden attribute if all modals have been removed
      if (ariaHideApp && ariaHiddenInstances > 0) {
        ariaHiddenInstances -= 1;
@@ -124,7 +126,7 @@ var ModalPortal = module.exports = React.createClass({
 
     focusManager.returnFocus();
     focusManager.teardownScopedFocus();
-    this.props.onAfterClose();
+    onAfterClose();
   },
 
   beforeOpen: function() {
