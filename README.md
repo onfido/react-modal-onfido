@@ -1,3 +1,5 @@
+> :warning: **This fork is no longer supported** and has been deprecated in favour of https://github.com/reactjs/react-modal
+
 # react-modal
 
 Accessible modal dialog component for React.JS
